@@ -38,11 +38,8 @@ public sealed class ScrapeCommand : AsyncCommand<ScrapeCommand.Settings>
         using var client = settings.CreateClient();
         var doc = await client.ScrapeAsync(new ScrapeInput
         {
-            StartUrls = [new { url = settings.Url }],
-            MaxTweets = settings.Max,
-            GetFollowers = settings.Followers,
-            GetFollowing = settings.Following,
-            GetRetweeters = settings.Retweeters
+            StartUrls = [settings.Url],
+            MaxItems = settings.Max
         });
 
         YamlOutput.Write(doc);

@@ -56,14 +56,14 @@ public sealed class SearchCommand : AsyncCommand<SearchCommand.Settings>
         var doc = await client.SearchAsync(new SearchInput
         {
             SearchTerms = [settings.Query],
-            MaxTweets = settings.Max,
+            MaxItems = settings.Max,
             Sort = settings.Sort,
             TweetLanguage = settings.Lang,
             OnlyVerifiedUsers = settings.Verified,
             OnlyImage = settings.Images,
             OnlyVideo = settings.Videos,
-            SinceDate = settings.Since,
-            UntilDate = settings.Until
+            Start = settings.Since,
+            End = settings.Until
         });
 
         YamlOutput.Write(doc);

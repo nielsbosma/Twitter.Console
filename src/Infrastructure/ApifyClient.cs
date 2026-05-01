@@ -28,13 +28,13 @@ public sealed class ApifyClient : IDisposable
 
     public async Task<JsonDocument> SearchAsync(SearchInput input)
     {
-        var endpoint = $"acts/quacker~twitter-scraper/run-sync-get-dataset-items?token={_token}";
+        var endpoint = $"acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={_token}";
         return await PostAndReadAsync(endpoint, input);
     }
 
     public async Task<JsonDocument> ScrapeAsync(ScrapeInput input)
     {
-        var endpoint = $"acts/quacker~twitter-scraper/run-sync-get-dataset-items?token={_token}";
+        var endpoint = $"acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={_token}";
         return await PostAndReadAsync(endpoint, input);
     }
 
@@ -58,22 +58,20 @@ public sealed class ApifyClient : IDisposable
 public sealed class SearchInput
 {
     public string[]? SearchTerms { get; init; }
-    public int MaxTweets { get; init; } = 20;
+    public int MaxItems { get; init; } = 20;
     public string? Sort { get; init; }
     public string? TweetLanguage { get; init; }
     public bool OnlyVerifiedUsers { get; init; }
     public bool OnlyImage { get; init; }
     public bool OnlyVideo { get; init; }
     public bool OnlyQuote { get; init; }
-    public string? SinceDate { get; init; }
-    public string? UntilDate { get; init; }
+    public string? Start { get; init; }
+    public string? End { get; init; }
 }
 
 public sealed class ScrapeInput
 {
-    public required object[] StartUrls { get; init; }
-    public int MaxTweets { get; init; } = 20;
-    public bool GetFollowers { get; init; }
-    public bool GetFollowing { get; init; }
-    public bool GetRetweeters { get; init; }
+    public string[]? StartUrls { get; init; }
+    public string[]? TwitterHandles { get; init; }
+    public int MaxItems { get; init; } = 20;
 }
